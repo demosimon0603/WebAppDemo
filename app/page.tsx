@@ -1,6 +1,7 @@
 "use client";
 
 import { CalendarDays, Languages, Mail, MapPin, Menu, ShieldCheck, Users } from "lucide-react";
+import Image from "next/image";
 import { FormEvent, useMemo, useState } from "react";
 
 type Locale = "zh" | "en";
@@ -26,9 +27,24 @@ const copy = {
     ],
     menuTitle: "今日招牌",
     menu: [
-      ["黑鐵鍋肋眼牛排", "乾式香料、炭烤玉米、煙燻奶油", "$980"],
-      ["邊境辣味烤雞", "辣椒蜂蜜、烤馬鈴薯、酸奶醬", "$620"],
-      ["牧場豆子燉鍋", "番茄、豆類、香料飯、烤餅", "$420"]
+      [
+        "黑鐵鍋肋眼牛排",
+        "乾式香料、炭烤玉米、煙燻奶油",
+        "$980",
+        "/menu-ribeye.png"
+      ],
+      [
+        "邊境辣味烤雞",
+        "辣椒蜂蜜、烤馬鈴薯、酸奶醬",
+        "$620",
+        "/menu-chicken.png"
+      ],
+      [
+        "牧場豆子燉鍋",
+        "番茄、豆類、香料飯、烤餅",
+        "$420",
+        "/menu-stew.png"
+      ]
     ],
     reservationTitle: "預約你的座位",
     reservationLead: "送出後，我們會把訂位資訊寄到餐廳 Gmail，並盡快回覆確認。",
@@ -73,9 +89,24 @@ const copy = {
     ],
     menuTitle: "House Signatures",
     menu: [
-      ["Cast-Iron Ribeye", "Dry rub, charred corn, smoked butter", "$980"],
-      ["Border-Spiced Roast Chicken", "Chile honey, roasted potatoes, sour cream sauce", "$620"],
-      ["Ranch Bean Stew", "Tomato, beans, spice rice, warm flatbread", "$420"]
+      [
+        "Cast-Iron Ribeye",
+        "Dry rub, charred corn, smoked butter",
+        "$980",
+        "/menu-ribeye.png"
+      ],
+      [
+        "Border-Spiced Roast Chicken",
+        "Chile honey, roasted potatoes, sour cream sauce",
+        "$620",
+        "/menu-chicken.png"
+      ],
+      [
+        "Ranch Bean Stew",
+        "Tomato, beans, spice rice, warm flatbread",
+        "$420",
+        "/menu-stew.png"
+      ]
     ],
     reservationTitle: "Book Your Table",
     reservationLead: "After submission, reservation details are emailed to the restaurant Gmail for confirmation.",
@@ -212,8 +243,9 @@ export default function Home() {
           <h2>{t.menuTitle}</h2>
         </div>
         <div className="menu-list">
-          {t.menu.map(([name, description, price]) => (
+          {t.menu.map(([name, description, price, image]) => (
             <article className="menu-item" key={name}>
+              <Image src={image} alt={name} width={276} height={207} sizes="(max-width: 620px) 96px, 138px" />
               <div>
                 <h3>{name}</h3>
                 <p>{description}</p>
@@ -232,6 +264,14 @@ export default function Home() {
           <div className="contact-row">
             <MapPin size={18} aria-hidden="true" />
             <span>88 Frontier Road, Taipei</span>
+          </div>
+          <div className="map-embed" aria-label="Restaurant map">
+            <iframe
+              title="Dust & Ember Steakhouse map"
+              src="https://www.google.com/maps?q=88%20Frontier%20Road%2C%20Taipei&output=embed"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
           <div className="contact-row">
             <Mail size={18} aria-hidden="true" />
