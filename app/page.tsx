@@ -116,6 +116,7 @@ export default function Home() {
   const [locale, setLocale] = useState<Locale>("zh");
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorDetail, setErrorDetail] = useState("");
   const t = copy[locale];
 
   const minDate = useMemo(() => new Date().toISOString().slice(0, 10), []);
@@ -123,6 +124,7 @@ export default function Home() {
   async function submitReservation(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus("loading");
+    setErrorDetail("");
 
     const response = await fetch("/api/reservations", {
       method: "POST",
@@ -136,7 +138,9 @@ export default function Home() {
       return;
     }
 
+    const result = await response.json().catch(() => null);
     setStatus("error");
+    setErrorDetail(result?.message ?? "");
   }
 
   return (
@@ -320,7 +324,12 @@ export default function Home() {
             {status === "loading" ? t.sending : t.submit}
           </button>
           {status === "success" && <p className="form-message success">{t.success}</p>}
-          {status === "error" && <p className="form-message error">{t.failure}</p>}
+          {status === "error" && (
+            <p className="form-message error">
+              {t.failure}
+              {errorDetail && <span className="error-detail">{errorDetail}</span>}
+            </p>
+          )}
         </form>
       </section>
 

@@ -163,6 +163,7 @@ h1 {
   color: rgba(255, 246, 229, 0.92);
   font-size: clamp(1.05rem, 2vw, 1.28rem);
   line-height: 1.75;
+  overflow-wrap: anywhere;
 }
 
 .hero-actions {
@@ -403,6 +404,15 @@ textarea:focus {
   background: #ffe1da;
 }
 
+.error-detail {
+  display: block;
+  margin-top: 8px;
+  color: rgba(125, 29, 22, 0.78);
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
 footer {
   padding: 28px 18px;
   color: #fff0cf;
@@ -474,6 +484,18 @@ footer {
 
   .hero-content {
     margin-left: 18px;
+    width: calc(100% - 36px);
+  }
+
+  h1 {
+    font-size: 2.85rem;
+    line-height: 0.98;
+  }
+
+  .hero-lead {
+    max-width: 320px;
+    font-size: 1rem;
+    line-break: anywhere;
   }
 
   .hero-stats,
@@ -487,7 +509,8 @@ footer {
 
   .icon-button,
   .admin-link {
-    flex: 1 1 160px;
+    flex: 1 1 100%;
+    width: 100%;
   }
 
   .menu-item {

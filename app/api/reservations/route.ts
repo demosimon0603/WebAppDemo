@@ -20,6 +20,17 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: false, error: "invalid_reservation" }, { status: 422 });
     }
 
-    return NextResponse.json({ ok: false, error: "email_delivery_failed" }, { status: 500 });
+    const message = error instanceof Error ? error.message : "Email delivery failed.";
+
+    return NextResponse.json(
+      {
+        ok: false,
+        error: message.startsWith("Missing Gmail email environment variables")
+          ? "missing_email_environment"
+          : "email_delivery_failed",
+        message
+      },
+      { status: 500 }
+    );
   }
 }

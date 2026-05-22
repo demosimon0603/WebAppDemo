@@ -8,7 +8,13 @@ export async function sendReservationEmail(reservation: ReservationInput) {
   const to = process.env.RESERVATION_TO_EMAIL;
 
   if (!user || !pass || !to) {
-    throw new Error("Missing Gmail email environment variables.");
+    const missing = [
+      !user ? "GMAIL_USER" : null,
+      !pass ? "GMAIL_APP_PASSWORD" : null,
+      !to ? "RESERVATION_TO_EMAIL" : null
+    ].filter(Boolean);
+
+    throw new Error(`Missing Gmail email environment variables: ${missing.join(", ")}`);
   }
 
   const transporter = nodemailer.createTransport({
