@@ -245,8 +245,10 @@ export default function Home() {
         <div className="menu-list">
           {t.menu.map(([name, description, price, image]) => (
             <article className="menu-item" key={name}>
-              <Image src={image} alt={name} width={276} height={207} sizes="(max-width: 620px) 96px, 138px" />
-              <div>
+              <div className="menu-photo">
+                <Image src={image} alt={name} width={720} height={520} sizes="(max-width: 620px) 100vw, 320px" />
+              </div>
+              <div className="menu-copy">
                 <h3>{name}</h3>
                 <p>{description}</p>
               </div>

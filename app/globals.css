@@ -280,26 +280,50 @@ h2 {
 
 .menu-list {
   display: grid;
-  gap: 14px;
-  width: min(920px, 100%);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  width: min(1120px, 100%);
 }
 
 .menu-item {
   display: grid;
-  grid-template-columns: 138px 1fr auto;
-  align-items: center;
-  gap: 22px;
-  border-bottom: 1px solid rgba(255, 240, 207, 0.2);
-  padding: 20px 0;
+  grid-template-rows: auto 1fr auto;
+  gap: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 240, 207, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  background: rgba(255, 240, 207, 0.07);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
 }
 
-.menu-item img {
-  width: 138px;
-  aspect-ratio: 4 / 3;
+.menu-photo {
+  position: relative;
+  overflow: hidden;
   border: 1px solid rgba(255, 240, 207, 0.28);
   border-radius: 8px;
+  aspect-ratio: 4 / 3;
+  background: rgba(15, 9, 6, 0.72);
+}
+
+.menu-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(17, 10, 7, 0), rgba(17, 10, 7, 0.34));
+  pointer-events: none;
+}
+
+.menu-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
   object-fit: cover;
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
+  transform: scale(1.02);
+}
+
+.menu-copy {
+  min-height: 118px;
 }
 
 .menu-item p {
@@ -310,6 +334,7 @@ h2 {
 .menu-item strong {
   color: var(--sand);
   font-size: 1.3rem;
+  align-self: end;
 }
 
 .reserve-section {
@@ -495,6 +520,7 @@ footer {
   }
 
   .feature-grid,
+  .menu-list,
   .reserve-section {
     grid-template-columns: 1fr;
   }
@@ -541,16 +567,10 @@ footer {
   }
 
   .menu-item {
-    grid-template-columns: 96px 1fr;
     gap: 14px;
   }
 
-  .menu-item img {
-    width: 96px;
-    grid-row: span 2;
-  }
-
-  .menu-item strong {
-    grid-column: 2;
+  .menu-copy {
+    min-height: auto;
   }
 }
